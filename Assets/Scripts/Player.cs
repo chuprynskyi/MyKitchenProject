@@ -5,33 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7;
+    [SerializeField] private GameInput gameInput;
 
     private bool isWalking;
 
     private void Update()
     {
-        Vector2 inputVector2 = new Vector2(0, 0);
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            inputVector2.y += 1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            inputVector2.y -= 1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputVector2.x += 1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            inputVector2.x -= 1;
-        }
-
-        inputVector2 = inputVector2.normalized;
-
-        Vector3 moveDir = new Vector3(inputVector2.x, 0f, inputVector2.y);
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
