@@ -20,7 +20,6 @@ public class GameInput : MonoBehaviour
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
-
         /*if (OnInteractAction != null)  // just like the code above
         {
             OnInteractAction(this, EventArgs.Empty)
