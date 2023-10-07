@@ -38,12 +38,12 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        /*if (selectedCounter != null)
+        if (selectedCounter != null)
         {
             selectedCounter.Interact();
-        }*/
+        }
 
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        /*Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
                 clearCounter.Interact();
 
             }
-        }
+        }*/
     }
 
     private void Update()
@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
         {
             SetSelectedCounte(null);
         }
+        //Debug.Log(selectedCounter);
     }
 
     public void HandleMovement()
@@ -172,7 +173,7 @@ public class Player : MonoBehaviour
 
     private void SetSelectedCounte(ClearCounter selectedCounter)
     {
-        this.selectedCounter = null;
+        this.selectedCounter = selectedCounter;
 
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedArgs
         {
