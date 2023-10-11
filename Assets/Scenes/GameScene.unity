@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &14373305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8959265098033569945, guid: 6f81972ea87f69647bffece5983467b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1455979672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee73482afa9d034fac0d18cd7d154ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &212226566
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,19 +822,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4704717820042127740, guid: 6f81972ea87f69647bffece5983467b7,
         type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4704717820042127740, guid: 6f81972ea87f69647bffece5983467b7,
-        type: 3}
       propertyPath: m_Name
       value: ClearCounter (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4704717820042127740, guid: 6f81972ea87f69647bffece5983467b7,
+    - target: {fileID: 8959265098033569945, guid: 6f81972ea87f69647bffece5983467b7,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c8a95f0e249a074469bc549ee1d4fe3e,
+        type: 2}
     - target: {fileID: 8963684450112220315, guid: 6f81972ea87f69647bffece5983467b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1102,6 +1110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 8959265098033569945, guid: 6f81972ea87f69647bffece5983467b7,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 14373305}
     - target: {fileID: 8963684450112220315, guid: 6f81972ea87f69647bffece5983467b7,
         type: 3}
       propertyPath: m_LocalPosition.x
