@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8963684450112220315}
   - component: {fileID: 1324351253103777035}
-  - component: {fileID: 8959265098033569945}
+  - component: {fileID: 3346263308668563212}
   m_Layer: 6
   m_Name: ClearCounter
   m_TagString: Untagged
@@ -57,7 +57,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8959265098033569945
+--- !u!114 &3346263308668563212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4704717820042127740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee73482afa9d034fac0d18cd7d154ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b2668415faad344aae273bde296df1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: d9614548a28d67440a171f8a99498146, type: 2}
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01feb8bd7fbe6a64f982f9587ad68cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 8959265098033569945}
+  clearCounter: {fileID: 3346263308668563212}
   visualGameObject: {fileID: 2945159838896710262}
 --- !u!1001 &9060818254105777754
 PrefabInstance:
