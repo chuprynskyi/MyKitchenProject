@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContainerCounter : BaseCounter, IKitchenObjectParent
+public class ContainerCounter : BaseCounter
 {
     public event EventHandler OnPlayerGrabbedObject;
 

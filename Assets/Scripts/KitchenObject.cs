@@ -36,4 +36,11 @@ public class KitchenObject : MonoBehaviour
     {
         return kitchenObjectParent;
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+
+        kitchenObjectParent.ClearKitchenObject();
+    }
 }

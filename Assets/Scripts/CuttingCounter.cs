@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter
+public class CuttingCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
+    [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
 
     public override void Interact(Player player)
     {
@@ -34,6 +33,18 @@ public class ClearCounter : BaseCounter
             {
                 // Player has KitchenObject
             }
+        }
+    }
+
+    public override void InteractAlternate(Player player)
+    {
+        if (HasKitchenObject())
+        {
+            //There is a KitchenObject here
+            GetKitchenObject().DestroySelf();
+
+            Transform kitchenObjectTransform = Instantiate(cutKitchenObjectSO.prefab);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
         }
     }
 }

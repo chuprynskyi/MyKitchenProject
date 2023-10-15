@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour
+public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
 
     [SerializeField] private Transform counterTopPoint;
@@ -12,6 +12,11 @@ public class BaseCounter : MonoBehaviour
     public virtual void Interact(Player player)
     {
         Debug.Log("BaseCounter.Interact()");
+    }
+
+    public virtual void InteractAlternate(Player player)
+    {
+        Debug.Log("BaseCounter.InteractAlternate()");
     }
 
     public Transform GetKitchenObjectFollowTransform()
