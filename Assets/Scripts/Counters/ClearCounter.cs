@@ -11,28 +11,48 @@ public class ClearCounter : BaseCounter
     {
         if (!HasKitchenObject())
         {
-            // There is no KitchenObject
-            if (!player.HasKitchenObject())
+            // There is no a KitchenObject here
+            if (player.HasKitchenObject())
             {
-                // Player doesn't have KitchenObject
+                // Player is carrying something
+                player.GetKitchenObject().SetKitchenObjectParent(this);
             }
             else
             {
-                // Player has KitchenObject
-                player.GetKitchenObject().SetKitchenObjectParent(this);
+                // Player isn't carrying something
             }
         }
         else
         {
-            //There is KitchenObject
-            if (!player.HasKitchenObject())
+            //There is a KitchenObject here
+            if (player.HasKitchenObject())
             {
-                // Player doesn't have KitchenObject
-                GetKitchenObject().SetKitchenObjectParent(player);
+                // Player is carrying something
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    // Player is holding a Plate
+                    if (plateKitchenObject.TryAddInredient(GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+                    }
+                }
+                else
+                {
+                    // Player is not carrying plate but something else
+                    if (GetKitchenObject().TryGetPlate(out plateKitchenObject))
+                    {
+                        // Counter is holding a Plate
+                        if (plateKitchenObject.TryAddInredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                        {
+                            player.GetKitchenObject().DestroySelf();
+                        }
+                    }
+                }
             }
             else
             {
-                // Player has KitchenObject
+                // Player isn't carrying something
+                GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
     }
