@@ -584,7 +584,7 @@ MonoBehaviour:
   - gameObject: {fileID: 8717451362271190896}
     kitchenObjectSO: {fileID: 11400000, guid: 868820ca053ac364da34c43c0c6854ad, type: 2}
   - gameObject: {fileID: 8717451363103827110}
-    kitchenObjectSO: {fileID: 11400000, guid: d9614548a28d67440a171f8a99498146, type: 2}
+    kitchenObjectSO: {fileID: 11400000, guid: 7c08ee5bc93815e4dbee39aeb9bf5cf7, type: 2}
   - gameObject: {fileID: 8717451363198083954}
     kitchenObjectSO: {fileID: 11400000, guid: 4ff6ab5bbf3c48941b749e32561f1b94, type: 2}
   - gameObject: {fileID: 8717451362283079996}
