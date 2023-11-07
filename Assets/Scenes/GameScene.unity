@@ -269,6 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 212226567}
   - component: {fileID: 212226568}
+  - component: {fileID: 212226569}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -310,6 +311,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   kitchenObjectHoldPoint: {fileID: 233898581}
+--- !u!114 &212226569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212226566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f39243479069045803b1bd065fd09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &219602635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,7 +3070,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7a05dfef8ff133848b3b25408c74021c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
