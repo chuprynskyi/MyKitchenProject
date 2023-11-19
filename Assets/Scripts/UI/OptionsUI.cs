@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class OptionsUI : MonoBehaviour
 {
+    public event EventHandler OnRebindBinding;
+
     public static OptionsUI Instance { get; private set; }
 
     [SerializeField] private Button soundEffectsButton;
@@ -135,6 +137,8 @@ public class OptionsUI : MonoBehaviour
             HidePressToRebindKey();
             VisualUpdate();
         });
+
+        OnRebindBinding?.Invoke(this, EventArgs.Empty);
     }
 
 }
