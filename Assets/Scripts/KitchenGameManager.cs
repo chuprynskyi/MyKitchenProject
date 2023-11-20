@@ -41,8 +41,11 @@ public class KitchenGameManager : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
-        state = State.CountdownToStart;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        if (state == State.WaitingToStart)
+        {
+            state = State.CountdownToStart;
+            OnStateChange?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
