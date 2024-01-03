@@ -18,13 +18,12 @@ public class PlatesCounter : BaseCounter
 
     private void Update()
     {
-        if(!IsServer) return;
+        if(!IsOwner) return;
 
         spawnPlateTimer += Time.deltaTime;
         if (spawnPlateTimer > spawnPlateTimerMax)
         {
             spawnPlateTimer = 0f;
-            // KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, this);
 
             if (KitchenGameManager.Instance.IsGamePlaing() && platesSpawnedAmount < platesSpawnedAmountMax)
             {
