@@ -79,6 +79,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5252124921480194641}
+    - targetCorrespondingSourceObject: {fileID: 4704717820042127740, guid: 03bf8bb2e2430af40ba3abde64e168fa,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4380134915636581246}
   m_SourcePrefab: {fileID: 100100000, guid: 03bf8bb2e2430af40ba3abde64e168fa, type: 3}
 --- !u!4 &6001154617320825673 stripped
 Transform:
@@ -113,6 +117,22 @@ MonoBehaviour:
   counterTopPoint: {fileID: 6200184769523377478}
   plateKitchenObjectSO: {fileID: 11400000, guid: 9d661c9704d1f6b46bcd538b93f225b2,
     type: 2}
+--- !u!114 &4380134915636581246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7955474869501847214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &5074414610352311743
 PrefabInstance:
   m_ObjectHideFlags: 0
