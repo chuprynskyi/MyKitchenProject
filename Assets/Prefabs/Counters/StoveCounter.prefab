@@ -791,10 +791,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1888921725886327514}
-    - targetCorrespondingSourceObject: {fileID: 4704717820042127740, guid: 03bf8bb2e2430af40ba3abde64e168fa,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4439715532030516230}
   m_SourcePrefab: {fileID: 100100000, guid: 03bf8bb2e2430af40ba3abde64e168fa, type: 3}
 --- !u!4 &5955277830025869167 stripped
 Transform:
@@ -831,22 +827,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1d63fabb9d6d3104c947b55b69954030, type: 2}
   burningRecipeSOArray:
   - {fileID: 11400000, guid: a638b0a346fa5bf41ad4d8c31e11cdeb, type: 2}
---- !u!114 &-4439715532030516230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8037379181171798664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1001 &4838510264517231614
 PrefabInstance:
   m_ObjectHideFlags: 0
