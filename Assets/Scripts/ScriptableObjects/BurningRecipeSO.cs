@@ -7,5 +7,5 @@ public class BurningRecipeSO : ScriptableObject
 {
     public KitchenObjectSO input;
     public KitchenObjectSO output;
-    public float burningingTimerMax;
+    public float burningTimerMax;
 }
