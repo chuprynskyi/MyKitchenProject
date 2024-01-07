@@ -157,9 +157,9 @@ public class StoveCounter : BaseCounter, IHasProgress
                     // Player is holding a Plate
                     if (plateKitchenObject.TryAddInredient(GetKitchenObject().GetKitchenObjectSO()))
                     {
-                        GetKitchenObject().DestroySelf();
+                        KitchenGameMultiplayer.Instance.DestroyKitchenObject(GetKitchenObject());
 
-                        state.Value = State.Idle;
+                        SetStateIdleServerRpc();
                     }
                 }
             }
@@ -168,9 +168,15 @@ public class StoveCounter : BaseCounter, IHasProgress
                 // Player isn't carrying something
                 GetKitchenObject().SetKitchenObjectParent(player);
 
-                state.Value = State.Idle;
+                SetStateIdleServerRpc();
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetStateIdleServerRpc()
+    {
+        state.Value = State.Idle;
     }
 
     [ServerRpc(RequireOwnership = false)]
