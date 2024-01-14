@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting.Antlr3.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KitchenGameManager : NetworkBehaviour
@@ -9,9 +11,11 @@ public class KitchenGameManager : NetworkBehaviour
     public static KitchenGameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
-    public event EventHandler OnGamePause;
-    public event EventHandler OnGameUnpause;
+    public event EventHandler OnLocalGamePaused;
+    public event EventHandler OnLocalGameUnpaused;
     public event EventHandler OnLocalPlayerReadyChanged;
+    public event EventHandler OnMultiplayerGamePaused;
+    public event EventHandler OnMultiplayerGameUnpaused;
 
     private enum State
     {
@@ -22,19 +26,23 @@ public class KitchenGameManager : NetworkBehaviour
     }
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
-    private float gamePlayingTimerMax = 10f;
-    private bool isGamePause = false;
+    private float gamePlayingTimerMax = 180f;
+
+    private NetworkVariable<bool> isGamePause = new NetworkVariable<bool>(false);
+    private bool isLocalGamePause = false;
     private bool isLocalPlayerReady = false;
 
-    private Dictionary<ulong, bool> playerReadyDictionary;
-
     private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
+
+    private Dictionary<ulong, bool> playerReadyDictionary;
+    private Dictionary<ulong, bool> playerPausedDictionary;
 
     private void Awake()
     {
         Instance = this;
 
         playerReadyDictionary = new Dictionary<ulong, bool>();
+        playerPausedDictionary = new Dictionary<ulong, bool>();
     }
 
     private void Start()
@@ -46,6 +54,23 @@ public class KitchenGameManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         state.OnValueChanged += State_OnValueChanged;
+        isGamePause.OnValueChanged += IsGamePause_OnValueChanged;
+    }
+
+    private void IsGamePause_OnValueChanged(bool previousValue, bool newValue)
+    {
+        if (isGamePause.Value)
+        {
+            Time.timeScale = 0f;
+
+            OnMultiplayerGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+
+            OnMultiplayerGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void State_OnValueChanged(State previousValue, State newValue)
@@ -158,19 +183,52 @@ public class KitchenGameManager : NetworkBehaviour
 
     public void TogglePauseGame()
     {
-        isGamePause = !isGamePause;
-        if (isGamePause)
+        isLocalGamePause = !isLocalGamePause;
+        if (isLocalGamePause)
         {
-            Time.timeScale = 0f;
+            PauseGameServerRpc();
 
-            OnGamePause?.Invoke(this, EventArgs.Empty);
+            OnLocalGamePaused?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            Time.timeScale = 1f;
+            UnpauseGameServerRpc();
 
-            OnGameUnpause?.Invoke(this, EventArgs.Empty);
+            OnLocalGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
 
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void PauseGameServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        playerPausedDictionary[serverRpcParams.Receive.SenderClientId] = true;
+
+        TestGamePausedState();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UnpauseGameServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        playerPausedDictionary[serverRpcParams.Receive.SenderClientId] = false;
+        
+        TestGamePausedState();
+    }
+
+    private void TestGamePausedState()
+    {
+        foreach (ulong clientID in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if (playerPausedDictionary.ContainsKey(clientID) && playerPausedDictionary[clientID])
+            {
+                // This player has paused
+                isGamePause.Value = true;
+
+                return;
+            }
+
+            // All players are not paused
+            isGamePause.Value = false;
+        }
     }
 }
