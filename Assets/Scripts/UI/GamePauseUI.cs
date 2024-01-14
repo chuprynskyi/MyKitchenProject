@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class GamePauseUI : MonoBehaviour
 
         mainMenuButton.onClick.AddListener(() =>
         {
+            NetworkManager.Singleton.Shutdown();
             SceneManager.LoadScene(Loader.Scene.MainMenuScene.ToString());
         });
 

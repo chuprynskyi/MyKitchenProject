@@ -45,7 +45,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
     public override void OnNetworkSpawn()
     {
-        if(IsOwner)
+        if (IsOwner)
         {
             LocalInstance = this;
         }
@@ -53,6 +53,19 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         transform.position = spawnPosList[(int)OwnerClientId];
 
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        }
+    }
+
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    {
+        if (clientId == OwnerClientId && HasKitchenObject())
+        {
+            KitchenObject.DestroyKitchenObject(GetKitchenObject());
+        }
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
@@ -146,7 +159,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
     public void HandleMovement()
     {
-        Vector2 inputVector = GameInput.Instance .GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 

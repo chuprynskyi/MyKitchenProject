@@ -31,6 +31,7 @@ public class KitchenGameManager : NetworkBehaviour
     private NetworkVariable<bool> isGamePause = new NetworkVariable<bool>(false);
     private bool isLocalGamePause = false;
     private bool isLocalPlayerReady = false;
+    private bool autoTestGamePauseState = false;
 
     private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
 
@@ -55,6 +56,16 @@ public class KitchenGameManager : NetworkBehaviour
     {
         state.OnValueChanged += State_OnValueChanged;
         isGamePause.OnValueChanged += IsGamePause_OnValueChanged;
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        }
+    }
+
+    private void NetworkManager_OnClientDisconnectCallback(ulong obj)
+    {
+        autoTestGamePauseState = true;
     }
 
     private void IsGamePause_OnValueChanged(bool previousValue, bool newValue)
@@ -83,7 +94,7 @@ public class KitchenGameManager : NetworkBehaviour
         if (state.Value == State.WaitingToStart)
         {
             isLocalPlayerReady = true;
-         
+
             OnLocalPlayerReadyChanged?.Invoke(this, EventArgs.Empty);
 
             OnLocalPlayerReadyServerRpc();
@@ -144,6 +155,15 @@ public class KitchenGameManager : NetworkBehaviour
                 break;
         }
         // Debug.Log(state);
+    }
+
+    private void LateUpdate()
+    {
+        if (autoTestGamePauseState)
+        {
+            autoTestGamePauseState = false;
+            TestGamePausedState();
+        }
     }
 
     public bool IsGamePlaing()
@@ -211,7 +231,7 @@ public class KitchenGameManager : NetworkBehaviour
     private void UnpauseGameServerRpc(ServerRpcParams serverRpcParams = default)
     {
         playerPausedDictionary[serverRpcParams.Receive.SenderClientId] = false;
-        
+
         TestGamePausedState();
     }
 
