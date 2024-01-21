@@ -47,7 +47,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
 
-        Debug.Log(GetBindingText(Binding.Interact));
+        // Debug.Log(GetBindingText(Binding.Interact));
     }
 
     private void OnDestroy()
