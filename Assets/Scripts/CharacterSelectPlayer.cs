@@ -24,6 +24,12 @@ public class CharacterSelectPlayer : MonoBehaviour
 
             PlayerData playerData = KitchenGameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
 
+            if (playerData.clientId == NetworkManager.ServerClientId)
+            {
+                NetworkManager.Singleton.Shutdown();
+                Loader.Load(Loader.Scene.MainMenuScene);
+            }
+
             KitchenGameMultiplayer.Instance.KickPlayer(playerData.clientId);
         });
     }
