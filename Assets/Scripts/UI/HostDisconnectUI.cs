@@ -29,6 +29,7 @@ public class HostDisconnectUI : MonoBehaviour
     {
         if(clientId == NetworkManager.ServerClientId)
         {
+            // Server is shutting down
             Show();
         }
     }
@@ -41,5 +42,10 @@ public class HostDisconnectUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnectCallback;
     }
 }
