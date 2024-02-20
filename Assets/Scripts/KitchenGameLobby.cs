@@ -1,6 +1,8 @@
 using Mono.CSharp;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -14,12 +16,52 @@ public class KitchenGameLobby : MonoBehaviour
 
     private Lobby joinedLobby;
 
+    private float _heartbeatTimer;
+
     private void Awake()
     {
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
         InitializeUnityAuthentication();
+    }
+
+    private void Update()
+    {
+        StartCoroutine(HeartbeatLobbyCoroutine(joinedLobby.Id, 15));
+
+        //HandleHeartbeat();
+    }
+/*
+    private void HandleHeartbeat()
+    {
+        if (IsLobbyHost())
+        {
+            _heartbeatTimer -= Time.time;
+            if (_heartbeatTimer < 0f)
+            {
+                float _heartbeatTimerMax = 15f;
+                _heartbeatTimer = _heartbeatTimerMax;
+
+                LobbyService.Instance.SendHeartbeatPingAsync(joinedLobby.Id);
+            }
+        }
+    }
+
+    private bool IsLobbyHost()
+    {
+        return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
+    }
+*/
+    IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+    {
+        var delay = new WaitForSecondsRealtime(waitTimeSeconds);
+
+        while (true)
+        {
+            LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
+            yield return delay;
+        }
     }
 
     private async void InitializeUnityAuthentication()
