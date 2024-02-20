@@ -67,11 +67,6 @@ public class KitchenGameLobby : MonoBehaviour
         }
     }
 
-    public Lobby GetLobby()
-    {
-        return joinedLobby;
-    }
-
     public async void JoinWithCode(string lobbyCode)
     {
         try
@@ -84,5 +79,10 @@ public class KitchenGameLobby : MonoBehaviour
         {
             Debug.Log(e);
         }
+    }
+
+    public Lobby GetLobby()
+    {
+        return joinedLobby;
     }
 }
