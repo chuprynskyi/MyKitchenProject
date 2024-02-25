@@ -23,6 +23,9 @@ public class CharacterSelectedUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.Shutdown();
+
+            KitchenGameLobby.Instance.LeaveLobby();
+
             Loader.Load(Loader.Scene.MainMenuScene);
         });
     }

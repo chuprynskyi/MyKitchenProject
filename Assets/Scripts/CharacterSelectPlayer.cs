@@ -32,6 +32,7 @@ public class CharacterSelectPlayer : MonoBehaviour
                 Loader.Load(Loader.Scene.MainMenuScene);
             }
 
+            KitchenGameLobby.Instance.KickPlayerOutOfLobby(playerData.playerId.ToString());
             KitchenGameMultiplayer.Instance.KickPlayer(playerData.clientId);
         });
     }
