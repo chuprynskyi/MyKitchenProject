@@ -16,6 +16,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     public event EventHandler OnPlayerDataNetworkListChanged;
 
     public static KitchenGameMultiplayer Instance { get; private set; }
+    public static bool isPlayMultiplayer;
 
     [SerializeField] private KitchenObjectListSO kitchenObjectListSO;
     [SerializeField] private List<Color> playerColorList;
@@ -23,7 +24,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private NetworkList<PlayerData> playerDataNetworkList;
 
     private string playerName;
-    private string playerId;
 
     private void Awake()
     {
